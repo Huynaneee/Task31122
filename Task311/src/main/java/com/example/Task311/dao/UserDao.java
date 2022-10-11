@@ -1,6 +1,8 @@
 package com.example.Task311.dao;
 
 import com.example.Task311.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 import java.util.List;
@@ -11,4 +13,6 @@ public interface UserDao {
     void removeUser(int id);
     User getUserById(int id);
     List<User> getListUsers();
+    User getUserByName (String name);
+    UserDetails loadUserByUsername (String username);
 }

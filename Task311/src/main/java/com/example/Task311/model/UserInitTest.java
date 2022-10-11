@@ -5,6 +5,9 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Component
@@ -21,9 +24,20 @@ public class UserInitTest {
     @PostConstruct
     public void generateUsersTest() {
 
-        userService.addUser(new User("testName1", "testLastName1", "testMail1"));
-        userService.addUser(new User("Bot", "Semenov", "bS@mail.ru"));
-        userService.addUser(new User("Arnold", "Schwarzenegger", "AS@yandex.ru"));
+        Role role1 = new Role(1L,"ROLE_USER");
+        Role role2 = new Role(2L, "ROLE_ADMIN");
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(role1);
+        roles.add(role2);
+
+        User admin = new User("Andrey", "Chernysow", "sda@yandex.ri", "101", Collections.singleton(role2));
+        User user = new User("Misha", "Galustyan", "p2p@gmail.ci", "102", Collections.singleton(role1));
+        User testUser = new User("Luna","Moon","moon21@sda", "100",roles);
+
+        
+
+
 
 
     }

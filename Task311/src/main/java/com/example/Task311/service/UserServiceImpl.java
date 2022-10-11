@@ -3,13 +3,16 @@ package com.example.Task311.service;
 import com.example.Task311.dao.UserDao;
 import com.example.Task311.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserDao userDao;
 
@@ -43,4 +46,13 @@ public class UserServiceImpl implements UserService{
         return userDao.getListUsers();
     }
 
+    @Override
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao.loadUserByUsername(username);
+    }
 }
