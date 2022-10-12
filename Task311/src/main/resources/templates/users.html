@@ -34,7 +34,11 @@
 
 <br/>
 <hr/>
-<a th:href="@{users/new}">new User</a>
+<a th:href="@{/admin/users/new}">new User</a>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 
 </body>
 </html>

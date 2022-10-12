@@ -19,10 +19,18 @@
     <label for="email">Enter E-mail:</label>
     <input type="text" th:field="*{email}" id="email"/>
 
+    <label for="password">Enter password:</label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+
     <br/>
     <input type="submit" value="Update"/>
 
 </form>
-
+<br/>
+<hr/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
