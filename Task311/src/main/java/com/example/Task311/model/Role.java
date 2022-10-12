@@ -1,69 +1,77 @@
 package com.example.Task311.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "t_role")
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
     private Long id;
 
-    private String name;
+    @Column(name = "role")
+    private String role;
 
     @Transient
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private List<User> users;
 
     public Role () {
 
     }
 
-    public Role(Long id) {
+
+    public Role (Long id, String role) {
         this.id = id;
-    }
-
-    public Role (Long id, String name) {
-        this.id = id;
-        this.name = name;
+        this.role = role;
     }
 
 
-    public String getName() {
-        return name;
+    public String getRole() {
+        return role;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRole(String role) {
+        this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                ", users=" + users +
+                '}';
+    }
 
-
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
     @Override
     public String getAuthority() {
-        return getName();
+        return role;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

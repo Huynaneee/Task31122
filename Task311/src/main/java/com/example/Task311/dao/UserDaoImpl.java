@@ -4,8 +4,6 @@ package com.example.Task311.dao;
 import com.example.Task311.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +21,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void addUser(User user) {
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
         entityManager.persist(user);
     }
 

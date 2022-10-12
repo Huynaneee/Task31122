@@ -1,5 +1,6 @@
 package com.example.Task311.model;
 
+import com.example.Task311.service.RoleService;
 import com.example.Task311.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import java.util.Set;
 public class UserInitTest {
 
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserInitTest(UserService userService) {
+    public UserInitTest(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
 
@@ -35,7 +38,13 @@ public class UserInitTest {
         User user = new User("Misha", "Galustyan", "p2p@gmail.ci", "102", Collections.singleton(role1));
         User testUser = new User("Luna","Moon","moon21@sda", "100",roles);
 
-        
+
+        roleService.addRole(role1);
+        roleService.addRole(role2);
+
+        userService.addUser(admin);
+        userService.addUser(user);
+        userService.addUser(testUser);
 
 
 

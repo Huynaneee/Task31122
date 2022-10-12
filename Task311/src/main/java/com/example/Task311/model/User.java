@@ -35,6 +35,7 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
+
     @Column( name = "password")
     @NotNull
     private String password;
@@ -55,6 +56,15 @@ public class User implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.roles = roles;
+    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -133,5 +143,19 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public String getRolesToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Role role: roles) {
+            stringBuilder.append(role.getRole());
+            stringBuilder.append(" ");
+        }
+
+        return stringBuilder.toString();
     }
 }
