@@ -1,6 +1,9 @@
 package com.example.Task311.dao;
 
 
+import com.example.Task311.DTO.RoleDTO;
+import com.example.Task311.DTO.UserDTO;
+import com.example.Task311.model.Role;
 import com.example.Task311.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -20,7 +25,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
-    public void addUser(User user) {
+    public void addUser(UserDTO user) {
         user.setPassword(passwordEncoder().encode(user.getPassword()));
         entityManager.persist(user);
     }

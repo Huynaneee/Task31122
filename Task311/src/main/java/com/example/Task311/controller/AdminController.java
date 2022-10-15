@@ -1,7 +1,12 @@
 package com.example.Task311.controller;
 
+import com.example.Task311.DTO.RoleDTO;
+import com.example.Task311.DTO.UserCreatDTO;
+import com.example.Task311.DTO.UserDTO;
+import com.example.Task311.model.Role;
 import com.example.Task311.model.User;
 import com.example.Task311.service.UserService;
+import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -13,6 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,13 +42,13 @@ public class AdminController {
     @GetMapping("/users/new")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String newUser(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserCreatDTO());
         return "new";
     }
 
     @PostMapping("/users")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String createUser (@ModelAttribute("user") User user) {
+    public String createUser (@ModelAttribute("user") UserDTO user) {
         userService.addUser(user);
         return "redirect:/admin/users";
     }
@@ -72,4 +80,5 @@ public class AdminController {
         model.addAttribute("user", userService.getUserByName(name));
         return "user";
     }
+
 }

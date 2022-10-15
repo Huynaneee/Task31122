@@ -1,18 +1,19 @@
 package com.example.Task311.controller;
 
+import com.example.Task311.DTO.RoleDTO;
+import com.example.Task311.DTO.UserDTO;
+import com.example.Task311.model.Role;
 import com.example.Task311.model.User;
 import com.example.Task311.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -31,4 +32,5 @@ public class UserController {
         model.addAttribute("user", user);
         return "user";
     }
+
 }
